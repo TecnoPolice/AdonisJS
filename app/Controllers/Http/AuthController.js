@@ -5,9 +5,7 @@ const { validate }  = use('Validator')
 const User          = use('App/Models/User')
 const Database      = use('Database')
 
-
 class AuthController {
-
 
     // Registra um usuário.
     async register({ request }){
@@ -44,8 +42,6 @@ class AuthController {
             }
         }
     }
-
-
 
     // Autentica um usuário já cadastrado.
     async authenticate({ request, auth }){
