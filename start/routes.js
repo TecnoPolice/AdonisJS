@@ -19,3 +19,5 @@ Route.post('/register', 'AuthController.register')
 
 Route.post('/auth', 'AuthController.authenticate')
 
+Route.get('users/:id', 'UserController.show').middleware('auth')
+
