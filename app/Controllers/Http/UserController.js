@@ -1,11 +1,13 @@
 'use strict'
-
+const user = use('App/Models/User')
+const Database = use('Database')
 class UserController {
 
-    async show({ auth }){
+    async show({ auth, params }){
+      const users = await Database.from('users').where('id', params.id)
         try {
             await auth.check()
-            return {message: 'Você está autenticado !'}
+            return {user: users}
           } catch (error) {
             return {message: 'Você não está autenticado !'}
           }

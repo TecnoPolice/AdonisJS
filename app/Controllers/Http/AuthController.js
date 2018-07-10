@@ -6,7 +6,6 @@ const User          = use('App/Models/User')
 const Database      = use('Database')
 
 class AuthController {
-
     // Registra um usuário.
     async register({ request }){
         // Recebe os campos passados na requisição.
@@ -27,9 +26,7 @@ class AuthController {
         }).getCount()
         // Verificando se existe algum usuário com o username ou email igual ao informado.
         if(check_email > 0 || check_username > 0){
-            return {
-                error: 'Usuário ou Email já cadastrado !',
-            }
+            return {error: 'Usuário ou Email já cadastrado !'}
         }else{
             // Validando os campos.
             const validation = await validate( data , rules)
