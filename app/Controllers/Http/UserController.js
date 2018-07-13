@@ -17,15 +17,15 @@ class UserController {
     }
 
     async delete({auth, params}){
-       try{
-          await auth.check()
-       } catch (error){
-         return {message: 'Você não está autenticado !'}
+      try{
+        // Verifica se o usuário está autenticado.
+        await auth.check()
+      } catch (error){
+        return {message: 'Você não está autenticado !'}
        }
-       const affectedRows = await Database
-       .table('users')
-       .where('id', params.id)
-       .del()
+      // Deletando o usuário.
+      const affectedRows = await Database.table('users').where('id', params.id).del()
+      // Verificando se o usuário foi deletado.
       if(affectedRows > 0){
         return {message: 'Usuário deletado com sucesso !'}
       }else{
