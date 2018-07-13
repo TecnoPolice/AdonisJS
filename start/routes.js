@@ -15,9 +15,9 @@
 
 const Route = use('Route')
 
-Route.post('/register', 'AuthController.register')
+Route.post('/register', 'AuthController.register').formats(['json'])
 
-Route.post('/auth', 'AuthController.authenticate')
+Route.post('/auth', 'AuthController.authenticate').formats(['json'])
 
-Route.get('users/:id', 'UserController.show').middleware('auth')
+Route.get('users/:id', 'UserController.show').middleware('auth').formats(['json'])
 
