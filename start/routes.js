@@ -23,3 +23,5 @@ Route.get('users/:id', 'UserController.show').middleware('auth').formats(['json'
 
 Route.get('users/:id/delete', 'UserController.delete').middleware('auth').formats(['json'])
 
+Route.get('roles/setup', 'RoleController.setup').middleware('auth').formats(['json'])
+
