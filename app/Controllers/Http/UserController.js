@@ -15,6 +15,23 @@ class UserController {
       // Retornando o usuário informado.
       return {user: users}
     }
+
+    async delete({auth, params}){
+       try{
+          await auth.check()
+       } catch (error){
+         return {message: 'Você não está autenticado !'}
+       }
+       const affectedRows = await Database
+       .table('users')
+       .where('id', params.id)
+       .del()
+      if(affectedRows > 0){
+        return {message: 'Usuário deletado com sucesso !'}
+      }else{
+        return {message: 'error'}
+      }
+    }
 }
 
 module.exports = UserController
