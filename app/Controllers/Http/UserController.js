@@ -15,7 +15,7 @@ class UserController {
       // Retornando o usuário informado.
       return {user: users}
     }
-
+    // Função que delete um usuário informado.
     async delete({auth, params}){
       try{
         // Verifica se o usuário está autenticado.
