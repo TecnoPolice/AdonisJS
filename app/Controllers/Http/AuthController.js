@@ -10,11 +10,19 @@ class AuthController {
     async register({ request }){
         // Recebe os campos passados na requisição.
         const data = request.only(['username', 'email', 'password'])
+        if(!request.input('username') && !request.input('email') && !request.input('password')){
+            return {message: 'Preencha todos os campos !'}
+        }
         // Criando uma regra de validação para os campos.
         const rules = {
             username: 'required',
             email: 'required|email|unique:users,email',
             password: 'required'
+        }
+        // Validando os campos.
+        const validation = await validate( data , rules)
+        if(validation.fails()){
+          return {error: validation.messages()}
         }
         // Contando os  usuários com o mesmo username informado.
         const check_username = await Database.from('Users').where({
@@ -28,15 +36,9 @@ class AuthController {
         if(check_email > 0 || check_username > 0){
             return {error: 'Usuário ou Email já cadastrado !'}
         }else{
-            // Validando os campos.
-            const validation = await validate( data , rules)
-            if(validation.fails()){
-                return { error: validation.messages()}
-            }else{
-                // Criando o usuário.
-                const user = await User.create(data)
-                return user
-            }
+            // Criando o usuário.
+            const user = await User.create(data)
+            return user
         }
     }
 
